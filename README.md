@@ -12,10 +12,39 @@ This project addresses the challenge of identifying chronic disease risks using 
 ---
 
 ## 🛠️ Technical Methodology
-* **Data Processing:** Exploratory Data Analysis (EDA) and rigorous data cleaning of health indicator variables.
-* **Handling Class Imbalance:** Applied **SMOTE** (Synthetic Minority Over-sampling Technique) to ensure the model could accurately learn from the minority class of diabetic cases.
-* **Algorithms Used:** Compared **AdaBoost** and **Gradient Boosting** ensemble methods.
-* **Optimization Strategy:** Focused on maximizing **Recall** to minimize False Negatives, which are critical in a medical context.
+
+### 1. Data Exploration & Visualization
+Using **Seaborn** and **Matplotlib**, a comprehensive EDA was conducted:
+* **BMI Analysis:** Identified a median BMI of 27 with significant outliers beyond 40.
+* **Risk Factors:** Established strong correlations between older age groups, higher BMI, and diabetic prevalence.
+* **Feature Correlation:** Identified BMI, General Health, and High Blood Pressure as the top predictors.
+
+### 2. Data Preparation & Cleaning
+* **Duplicate Removal:** Streamlined the dataset for better model integrity.
+* **Outlier Handling:** Used the IQR method to filter extreme BMI values.
+* **Feature Engineering:** Converted numerical features (Age, Income, Education, Sex, GenHlth) into meaningful categorical ranges and applied **One-Hot Encoding**.
+* **Addressing Imbalance:** Implemented **SMOTE** (Synthetic Minority Over-sampling Technique) to balance the target classes, ensuring the model identifies diabetic cases effectively.
+
+### 3. Machine Learning Implementation
+Models built and compared using **Scikit-Learn**:
+* Logistic Regression
+* Decision Tree
+* Random Forest
+* **AdaBoost (Selected Model)**
+* Gradient Boosting
+* Linear SVC
+
+---
+
+## 📊 Model Selection & Business Logic
+In medical screening, **Recall** is the most critical metric because the cost of a "False Negative" (missing a sick patient) is far higher than a "False Positive."
+
+| Metric (After SMOTE) | AdaBoost | Gradient Boosting |
+| :--- | :--- | :--- |
+| **Recall (Diabetic Class)** | **0.65** | 0.29 |
+| **Decision** | **Selected** | Rejected |
+
+**Conclusion:** Despite a lower overall accuracy, **AdaBoost** was selected because it successfully identifies **65%** of diabetic cases, whereas Gradient Boosting missed **71%** of cases.
 
 ---
 
@@ -57,14 +86,14 @@ To replicate the results, follow these steps within your environment:
     jupyter notebook
     ```
 2.  **Open the Project:** Locate and open `244423Q_IT2313_Assignment.ipynb`.
-3.  **Execute Workflow:** Run all cells to view the EDA visualizations, model training, and final evaluation metrics.
+3.  **Process Data:** Run all cells to process diabetes.csv, generate visualizations, and evaluate model performance.
 
 ---
 
 ## 📂 Project Roadmap
 The analysis follows a structured machine learning pipeline:
-
-* **Import & Exploration:** Loading clinical health indicator data and checking distributions using **Seaborn** and **Matplotlib**.
-* **Preparation:** Data cleaning and implementing **SMOTE** to address class imbalance between diabetic and non-diabetic cases.
-* **Training:** Executing supervised learning classification models.
-* **Comparison:** Evaluating models via Confusion Matrix and **Recall** scores to determine the best fit for medical screening.
+* **Import & Exploration:** Loading clinical health indicator data, understanding data and verify missing data.
+* **EDA:** Visualization of BMI distributions, health trends, and correlation matrices using **MatplotLib** and **Seaborn**.
+* **Preparation:** Outlier filtering and categorical encoding.
+* **Training/SMOTE:** Training initial models and re-training with balanced data.
+* **Model Comparison / Tuning:** Evaluating performance via Confusion Matrix and F1/Recall score to determine the best model for medical screening.
