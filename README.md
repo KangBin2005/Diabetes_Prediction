@@ -1,4 +1,4 @@
-# 🩺 Chronic Disease Prediction System
+# 🩺 Diabetic Cases Prediction System
 > **A machine learning approach to early diabetes detection focusing on high-recall clinical screening.**
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
